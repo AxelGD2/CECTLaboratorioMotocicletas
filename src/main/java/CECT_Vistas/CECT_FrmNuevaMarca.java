@@ -54,13 +54,13 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
 
         tableMarcas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nombre", "Pais"
             }
         ));
         jScrollPane1.setViewportView(tableMarcas);
@@ -140,7 +140,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable tableMarcas;
+    public javax.swing.JTable tableMarcas;
     public javax.swing.JTextField txtNombreMarca;
     public javax.swing.JTextField txtPaisOrigen;
     // End of variables declaration//GEN-END:variables

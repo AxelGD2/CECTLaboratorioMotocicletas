@@ -4,12 +4,16 @@
  */
 package CECT_Vistas;
 
+import CECT_Controladores.CECTMarcaControlador;
+import CECT_Modelos.CECTMarcaDAO;
+import CECT_Modelos.CECTMarca;
+
 /**
  *
  * @author axele
  */
 public class CECT_MDI extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CECT_MDI.class.getName());
 
     /**
@@ -87,12 +91,24 @@ public class CECT_MDI extends javax.swing.JFrame {
     private void nuevaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMarcaActionPerformed
         // TODO add your handling code here:
         CECT_FrmNuevaMarca nuevaMarcaForm = new CECT_FrmNuevaMarca();
+        CECT_Modelos.CECTMarca marca = new CECTMarca();
+        CECT_Modelos.CECTMarcaDAO dao = new CECTMarcaDAO();
+
+        CECT_Controladores.CECTMarcaControlador controlador = new CECTMarcaControlador(marca, dao, nuevaMarcaForm);
         jDesktopPane1.add(nuevaMarcaForm);
+        controlador.iniciar();
         nuevaMarcaForm.setVisible(true);
+
+        try {
+            nuevaMarcaForm.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            System.err.println("Error al enfocar el formulario: " + e.getMessage());
+        }
     }//GEN-LAST:event_nuevaMarcaActionPerformed
 
     private void nuevaMotocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMotocicletaActionPerformed
         // TODO add your handling code here:
+
         CECT_FrmNuevaMotocicleta nuevaMotoForm = new CECT_FrmNuevaMotocicleta();
         jDesktopPane1.add(nuevaMotoForm);
         nuevaMotoForm.setVisible(true);

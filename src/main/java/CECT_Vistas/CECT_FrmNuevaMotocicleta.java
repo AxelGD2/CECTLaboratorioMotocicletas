@@ -4,6 +4,8 @@
  */
 package CECT_Vistas;
 
+import CECT_Modelos.CECTMarca;
+import CECT_Modelos.CECTMarcaDAO;
 import CECT_Modelos.CECTMotocicleta;
 import java.util.ArrayList;
 import CECT_Modelos.CECTMotocicletaDAO;
@@ -13,16 +15,23 @@ import CECT_Modelos.CECTMotocicletaDAO;
  * @author axele
  */
 public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
-    private CECTMotocicletaDAO dao = new CECTMotocicletaDAO();
+    private CECTMarcaDAO dao = new CECTMarcaDAO();
     /**
      * Creates new form CECT_FrmNuevaMotocicleta
      */
     public CECT_FrmNuevaMotocicleta() {
         initComponents();
- 
+        cargarMarcas();
     }
 
-    
+    public void cargarMarcas(){
+        ArrayList<CECTMarca> marcas = dao.listar();
+        comboMarcaMoto.removeAllItems();
+        
+        for(CECTMarca marca : marcas){
+            comboMarcaMoto.addItem(marca);
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,7 +191,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
     public javax.swing.JButton btnActualizarMoto;
     public javax.swing.JButton btnEliminarMoto;
     public javax.swing.JButton btnGuardarMoto;
-    public javax.swing.JComboBox<CECTMotocicleta> comboMarcaMoto;
+    public javax.swing.JComboBox<CECTMarca> comboMarcaMoto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

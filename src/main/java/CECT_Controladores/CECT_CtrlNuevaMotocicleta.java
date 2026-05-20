@@ -4,6 +4,7 @@
  */
 package CECT_Controladores;
 
+import CECT_Modelos.CECTMarca;
 import CECT_Modelos.CECTMotocicleta;
 import CECT_Modelos.CECTMotocicletaDAO;
 import CECT_Vistas.CECT_FrmNuevaMotocicleta;
@@ -85,7 +86,7 @@ public class CECT_CtrlNuevaMotocicleta implements ActionListener{
                 }
 
               
-                CECTMotocicleta marcaSeleccionada = (CECTMotocicleta) form.comboMarcaMoto.getSelectedItem();
+                CECTMarca marcaSeleccionada = (CECTMarca) form.comboMarcaMoto.getSelectedItem();
 
                 motocicleta.setModelo(modelo); 
                 motocicleta.setCilindraje(cilindraje);                    

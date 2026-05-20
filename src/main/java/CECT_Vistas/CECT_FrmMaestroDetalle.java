@@ -69,6 +69,10 @@ public class CECT_FrmMaestroDetalle extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         MarcasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

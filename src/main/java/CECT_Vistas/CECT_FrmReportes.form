@@ -49,6 +49,15 @@
               </Group>
               <EmptySpace pref="107" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+              <Component id="btnExportarTXT" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+              <Component id="btnExportarCSV" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnExportarJSON" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -68,7 +77,13 @@
                   <Component id="jScrollPane2" min="-2" pref="300" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="300" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="138" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnExportarTXT" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExportarCSV" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExportarJSON" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,6 +153,30 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Colores por Marca"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExportarTXT">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exportar TXT"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExportarCSV">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exportar CSV"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExportarJSON">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exportar JSON"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

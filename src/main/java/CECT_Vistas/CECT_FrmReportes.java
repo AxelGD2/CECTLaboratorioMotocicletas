@@ -36,6 +36,9 @@ public class CECT_FrmReportes extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btnExportarTXT = new javax.swing.JButton();
+        btnExportarCSV = new javax.swing.JButton();
+        btnExportarJSON = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -55,6 +58,12 @@ public class CECT_FrmReportes extends javax.swing.JInternalFrame {
         jLabel3.setText("Clasificacion de Marcas");
 
         jLabel4.setText("Colores por Marca");
+
+        btnExportarTXT.setText("Exportar TXT");
+
+        btnExportarCSV.setText("Exportar CSV");
+
+        btnExportarJSON.setText("Exportar JSON");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,6 +89,14 @@ public class CECT_FrmReportes extends javax.swing.JInternalFrame {
                         .addGap(60, 60, 60)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(107, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(btnExportarTXT)
+                .addGap(161, 161, 161)
+                .addComponent(btnExportarCSV)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExportarJSON)
+                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +113,12 @@ public class CECT_FrmReportes extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExportarTXT)
+                    .addComponent(btnExportarCSV)
+                    .addComponent(btnExportarJSON))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,6 +126,9 @@ public class CECT_FrmReportes extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnExportarCSV;
+    public javax.swing.JButton btnExportarJSON;
+    public javax.swing.JButton btnExportarTXT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -39,7 +39,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
         txtImagenMoto = new javax.swing.JTextField();
         btnGuardarMoto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMotocicletas = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         btnActualizarMoto = new javax.swing.JButton();
         btnEliminarMoto = new javax.swing.JButton();
@@ -69,7 +69,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
 
         btnGuardarMoto.setText("Guardar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMotocicletas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -80,7 +80,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMotocicletas);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Motocicletas");
@@ -173,10 +173,10 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizarMoto;
-    private javax.swing.JButton btnEliminarMoto;
-    private javax.swing.JButton btnGuardarMoto;
-    private javax.swing.JComboBox<String> comboMarcaMoto;
+    public javax.swing.JButton btnActualizarMoto;
+    public javax.swing.JButton btnEliminarMoto;
+    public javax.swing.JButton btnGuardarMoto;
+    public javax.swing.JComboBox<String> comboMarcaMoto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -185,10 +185,10 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JSpinner spinCilindrajeMoto;
-    private javax.swing.JTextField txtColorMoto;
-    private javax.swing.JTextField txtImagenMoto;
-    private javax.swing.JTextField txtModeloMoto;
+    public javax.swing.JSpinner spinCilindrajeMoto;
+    public static javax.swing.JTable tableMotocicletas;
+    public javax.swing.JTextField txtColorMoto;
+    public javax.swing.JTextField txtImagenMoto;
+    public javax.swing.JTextField txtModeloMoto;
     // End of variables declaration//GEN-END:variables
 }

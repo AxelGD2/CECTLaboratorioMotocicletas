@@ -33,7 +33,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
         txtPaisOrigen = new javax.swing.JTextField();
         btnGuardarMarca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMarcas = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         btnActualizarMarca = new javax.swing.JButton();
         btnEliminarMarca = new javax.swing.JButton();
@@ -52,7 +52,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
 
         btnGuardarMarca.setText("Guardar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMarcas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,7 +63,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMarcas);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Marcas Registradas");
@@ -132,16 +132,16 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizarMarca;
-    private javax.swing.JButton btnEliminarMarca;
-    private javax.swing.JButton btnGuardarMarca;
+    public javax.swing.JButton btnActualizarMarca;
+    public javax.swing.JButton btnEliminarMarca;
+    public javax.swing.JButton btnGuardarMarca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtNombreMarca;
-    private javax.swing.JTextField txtPaisOrigen;
+    public static javax.swing.JTable tableMarcas;
+    public javax.swing.JTextField txtNombreMarca;
+    public javax.swing.JTextField txtPaisOrigen;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,6 +55,7 @@ public class CECT_MDI extends javax.swing.JFrame {
         jMenu2.setText("Marcas");
 
         nuevaMarca.setText("Nueva Marca");
+        nuevaMarca.addActionListener(this::nuevaMarcaActionPerformed);
         jMenu2.add(nuevaMarca);
 
         jMenuBar1.add(jMenu2);
@@ -62,6 +63,7 @@ public class CECT_MDI extends javax.swing.JFrame {
         jMenu3.setText("Motocicletas");
 
         nuevaMotocicleta.setText("Nueva Motocicleta");
+        nuevaMotocicleta.addActionListener(this::nuevaMotocicletaActionPerformed);
         jMenu3.add(nuevaMotocicleta);
 
         jMenuBar1.add(jMenu3);
@@ -81,6 +83,20 @@ public class CECT_MDI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nuevaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMarcaActionPerformed
+        // TODO add your handling code here:
+        CECT_FrmNuevaMarca nuevaMarcaForm = new CECT_FrmNuevaMarca();
+        jDesktopPane1.add(nuevaMarcaForm);
+        nuevaMarcaForm.setVisible(true);
+    }//GEN-LAST:event_nuevaMarcaActionPerformed
+
+    private void nuevaMotocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMotocicletaActionPerformed
+        // TODO add your handling code here:
+        CECT_FrmNuevaMotocicleta nuevaMotoForm = new CECT_FrmNuevaMotocicleta();
+        jDesktopPane1.add(nuevaMotoForm);
+        nuevaMotoForm.setVisible(true);
+    }//GEN-LAST:event_nuevaMotocicletaActionPerformed
 
     /**
      * @param args the command line arguments

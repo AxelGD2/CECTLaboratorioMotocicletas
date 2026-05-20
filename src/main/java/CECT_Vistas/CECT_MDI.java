@@ -4,6 +4,9 @@
  */
 package CECT_Vistas;
 
+import CECT_Modelos.CECTMotocicleta;
+import CECT_Modelos.CECTMotocicletaDAO;
+
 /**
  *
  * @author axele
@@ -86,7 +89,7 @@ public class CECT_MDI extends javax.swing.JFrame {
 
     private void nuevaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMarcaActionPerformed
         // TODO add your handling code here:
-        CECT_FrmNuevaMarca nuevaMarcaForm = new CECT_FrmNuevaMarca();
+        CECT_FrmNuevaMarca nuevaMarcaForm = new CECT_FrmNuevaMarca();        
         jDesktopPane1.add(nuevaMarcaForm);
         nuevaMarcaForm.setVisible(true);
     }//GEN-LAST:event_nuevaMarcaActionPerformed
@@ -94,8 +97,12 @@ public class CECT_MDI extends javax.swing.JFrame {
     private void nuevaMotocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMotocicletaActionPerformed
         // TODO add your handling code here:
         CECT_FrmNuevaMotocicleta nuevaMotoForm = new CECT_FrmNuevaMotocicleta();
+        CECTMotocicleta modelo = new CECTMotocicleta();
+        CECTMotocicletaDAO dao = new CECTMotocicletaDAO();
+        CECT_Controladores.CECT_CtrlNuevaMotocicleta ctrl = new CECT_Controladores.CECT_CtrlNuevaMotocicleta(modelo, nuevaMotoForm, dao);
         jDesktopPane1.add(nuevaMotoForm);
         nuevaMotoForm.setVisible(true);
+        ctrl.cargarTabla();
     }//GEN-LAST:event_nuevaMotocicletaActionPerformed
 
     /**

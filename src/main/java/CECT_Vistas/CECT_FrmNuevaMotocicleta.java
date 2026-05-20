@@ -4,19 +4,26 @@
  */
 package CECT_Vistas;
 
+import CECT_Modelos.CECTMotocicleta;
+import java.util.ArrayList;
+import CECT_Modelos.CECTMotocicletaDAO;
+
 /**
  *
  * @author axele
  */
 public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
-
+    private CECTMotocicletaDAO dao = new CECTMotocicletaDAO();
     /**
      * Creates new form CECT_FrmNuevaMotocicleta
      */
     public CECT_FrmNuevaMotocicleta() {
         initComponents();
+ 
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +53,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setMaximizable(true);
+        setAutoscrolls(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel1.setText("Nueva Motocicleta");
@@ -65,19 +73,17 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Imagen:");
 
-        comboMarcaMoto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnGuardarMoto.setText("Guardar");
 
         tableMotocicletas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Modelo", "Clindraje", "Color", "Imagen", "Imagen"
             }
         ));
         jScrollPane1.setViewportView(tableMotocicletas);
@@ -113,9 +119,9 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(btnGuardarMoto)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 236, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +166,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizarMoto)
@@ -176,7 +182,7 @@ public class CECT_FrmNuevaMotocicleta extends javax.swing.JInternalFrame {
     public javax.swing.JButton btnActualizarMoto;
     public javax.swing.JButton btnEliminarMoto;
     public javax.swing.JButton btnGuardarMoto;
-    public javax.swing.JComboBox<String> comboMarcaMoto;
+    public javax.swing.JComboBox<CECTMotocicleta> comboMarcaMoto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

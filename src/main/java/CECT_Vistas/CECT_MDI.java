@@ -104,6 +104,7 @@ public class CECT_MDI extends javax.swing.JFrame {
         maestroDetalle.add(jMenuItem3);
 
         jMenuItem4.setText("MaestroDetalle");
+        jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         maestroDetalle.add(jMenuItem4);
 
         jMenuBar1.add(maestroDetalle);
@@ -126,7 +127,7 @@ public class CECT_MDI extends javax.swing.JFrame {
 
     private void nuevaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMarcaActionPerformed
         // TODO add your handling code here:
-        CECT_FrmNuevaMarca nuevaMarcaForm = new CECT_FrmNuevaMarca();        
+        CECT_FrmNuevaMarca nuevaMarcaForm = new CECT_FrmNuevaMarca();
         CECT_Modelos.CECTMarca marca = new CECTMarca();
         CECT_Modelos.CECTMarcaDAO dao = new CECTMarcaDAO();
 
@@ -159,6 +160,18 @@ public class CECT_MDI extends javax.swing.JFrame {
 
         reportesForm.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        CECT_Vistas.CECT_FrmMaestroDetalle vista = new CECT_Vistas.CECT_FrmMaestroDetalle();
+        CECT_Modelos.CECTMaestroDetalleDAO dao = new CECT_Modelos.CECTMaestroDetalleDAO();
+
+        CECT_Controladores.CECTMaestroDetalleControlador controlador = new CECT_Controladores.CECTMaestroDetalleControlador(dao, vista);
+
+        jDesktopPane1.add(vista);
+        controlador.iniciar();
+        vista.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

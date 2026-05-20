@@ -32,13 +32,39 @@ public class CECT_MDI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         nuevaMarca = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         nuevaMotocicleta = new javax.swing.JMenuItem();
+        maestroDetalle = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenu4.setText("File");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("Edit");
+        jMenuBar2.add(jMenu5);
+
+        jMenu6.setText("File");
+        jMenuBar3.add(jMenu6);
+
+        jMenu7.setText("Edit");
+        jMenuBar3.add(jMenu7);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,9 +78,6 @@ public class CECT_MDI extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 462, Short.MAX_VALUE)
         );
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Marcas");
 
@@ -71,6 +94,17 @@ public class CECT_MDI extends javax.swing.JFrame {
         jMenu3.add(nuevaMotocicleta);
 
         jMenuBar1.add(jMenu3);
+
+        maestroDetalle.setText("Reportes");
+
+        jMenuItem3.setText("Reportes");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
+        maestroDetalle.add(jMenuItem3);
+
+        jMenuItem4.setText("MaestroDetalle");
+        maestroDetalle.add(jMenuItem4);
+
+        jMenuBar1.add(maestroDetalle);
 
         setJMenuBar(jMenuBar1);
 
@@ -98,12 +132,6 @@ public class CECT_MDI extends javax.swing.JFrame {
         jDesktopPane1.add(nuevaMarcaForm);
         controlador.iniciar();
         nuevaMarcaForm.setVisible(true);
-
-        try {
-            nuevaMarcaForm.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-            System.err.println("Error al enfocar el formulario: " + e.getMessage());
-        }
     }//GEN-LAST:event_nuevaMarcaActionPerformed
 
     private void nuevaMotocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMotocicletaActionPerformed
@@ -113,6 +141,18 @@ public class CECT_MDI extends javax.swing.JFrame {
         jDesktopPane1.add(nuevaMotoForm);
         nuevaMotoForm.setVisible(true);
     }//GEN-LAST:event_nuevaMotocicletaActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        CECT_Vistas.CECT_FrmReportes reportesForm = new CECT_Vistas.CECT_FrmReportes();
+        CECT_Modelos.CECTReportesDAO dao = new CECT_Modelos.CECTReportesDAO();
+
+        CECT_Controladores.CECTReportesControlador controlador = new CECT_Controladores.CECTReportesControlador(dao, reportesForm);
+        jDesktopPane1.add(reportesForm);
+        controlador.iniciar();
+
+        reportesForm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,10 +181,20 @@ public class CECT_MDI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu maestroDetalle;
     private javax.swing.JMenuItem nuevaMarca;
     private javax.swing.JMenuItem nuevaMotocicleta;
     // End of variables declaration//GEN-END:variables

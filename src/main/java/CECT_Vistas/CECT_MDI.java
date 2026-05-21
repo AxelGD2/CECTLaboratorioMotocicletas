@@ -4,8 +4,8 @@
  */
 package CECT_Vistas;
 
-import CECT_Modelos.CECTMotocicleta;
-import CECT_Modelos.CECTMotocicletaDAO;
+import CECT_Modelos.CECTVehiculo;
+import CECT_Modelos.CECTVehiculoDAO;
 import CECT_Controladores.CECTMarcaControlador;
 import CECT_Modelos.CECTMarcaDAO;
 import CECT_Modelos.CECTMarca;
@@ -89,9 +89,9 @@ public class CECT_MDI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Motocicletas");
+        jMenu3.setText("Vehiculos");
 
-        nuevaMotocicleta.setText("Nueva Motocicleta");
+        nuevaMotocicleta.setText("Nuevo Vehiculo");
         nuevaMotocicleta.addActionListener(this::nuevaMotocicletaActionPerformed);
         jMenu3.add(nuevaMotocicleta);
 
@@ -140,13 +140,17 @@ public class CECT_MDI extends javax.swing.JFrame {
     private void nuevaMotocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaMotocicletaActionPerformed
         // TODO add your handling code here:
 
-        CECT_FrmNuevaMotocicleta nuevaMotoForm = new CECT_FrmNuevaMotocicleta();
-        CECTMotocicleta modelo = new CECTMotocicleta();
-        CECTMotocicletaDAO dao = new CECTMotocicletaDAO();
-        CECT_Controladores.CECT_CtrlNuevaMotocicleta ctrl = new CECT_Controladores.CECT_CtrlNuevaMotocicleta(modelo, nuevaMotoForm, dao);
+        CECT_FrmNuevoVehiculo nuevaMotoForm = new CECT_FrmNuevoVehiculo();
+        CECTVehiculo modelo = new CECTVehiculo();
+        CECTVehiculoDAO dao = new CECTVehiculoDAO();
+
+        CECT_Controladores.CECT_CtrlNuevoVehiculo ctrl = new CECT_Controladores.CECT_CtrlNuevoVehiculo(modelo, nuevaMotoForm, dao);
+
         jDesktopPane1.add(nuevaMotoForm);
+
+        ctrl.iniciar();
+
         nuevaMotoForm.setVisible(true);
-        ctrl.cargarTabla();
     }//GEN-LAST:event_nuevaMotocicletaActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

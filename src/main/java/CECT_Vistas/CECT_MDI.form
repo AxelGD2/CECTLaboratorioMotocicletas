@@ -67,12 +67,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Motocicletas"/>
+            <Property name="text" type="java.lang.String" value="Vehiculos"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevaMotocicleta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nueva Motocicleta"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Vehiculo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaMotocicletaActionPerformed"/>

@@ -1,50 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CECT_Modelos;
 
-/**
- *
- * @author axele
- */
-public class CECTMotocicleta {
-    private int idMotocicleta;
+public class CECTVehiculo {
+    private int idVehiculo;
     private String modelo;
-    private int cilindraje;
+    private int anio;
     private String color;
     private int idMarca;
     private String imagen;
+    private String pais;
     private String marca;
 
-    public CECTMotocicleta() {
+
+    public CECTVehiculo() {
     }
 
-    public CECTMotocicleta(String modelo, int cilindraje, String color, int idMarca, String imagen, String marca) {
+
+    public CECTVehiculo(String modelo, int anio, String color, int idMarca, String imagen, String marca) {
         this.modelo = modelo;
-        this.cilindraje = cilindraje;
+        this.anio = anio;
         this.color = color;
         this.idMarca = idMarca;
         this.imagen = imagen;
         this.marca = marca;
     }
 
-    public CECTMotocicleta(int idMotocicleta, String modelo, int cilindraje, String color, int idMarca, String imagen, String marca) {
-        this.idMotocicleta = idMotocicleta;
+
+    public CECTVehiculo(int idVehiculo, String modelo, int anio, String color, int idMarca, String imagen, String marca) {
+        this.idVehiculo = idVehiculo;
         this.modelo = modelo;
-        this.cilindraje = cilindraje;
+        this.anio = anio;
         this.color = color;
         this.idMarca = idMarca;
         this.imagen = imagen;
         this.marca = marca;
     }
 
-    public int getIdMotocicleta() {
-        return idMotocicleta;
+    public String getPais() {
+        return pais;
     }
 
-    public void setIdMotocicleta(int idMotocicleta) {
-        this.idMotocicleta = idMotocicleta;
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+    
+    
+
+    public int getIdVehiculo() {
+        return idVehiculo;
+    }
+
+    public void setIdVehiculo(int idVehiculo) {
+        this.idVehiculo = idVehiculo;
     }
 
     public String getModelo() {
@@ -55,12 +61,12 @@ public class CECTMotocicleta {
         this.modelo = modelo;
     }
 
-    public int getCilindraje() {
-        return cilindraje;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setCilindraje(int cilindraje) {
-        this.cilindraje = cilindraje;
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
     public String getColor() {
@@ -97,6 +103,6 @@ public class CECTMotocicleta {
     
     @Override
     public String toString(){
-        return marca;
+        return marca; 
     }
 }

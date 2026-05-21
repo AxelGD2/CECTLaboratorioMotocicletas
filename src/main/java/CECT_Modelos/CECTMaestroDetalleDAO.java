@@ -14,10 +14,11 @@ public class CECTMaestroDetalleDAO {
     PreparedStatement ps;
     ResultSet rs;
 
-    // Método para cargar la tabla Maestra (Marcas)
     public List<CECTMarca> listarMarcas() {
         List<CECTMarca> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Marcas";
+        String sql = "SELECT m.idmarca, m.nombre_marca, m.pais_origen, COUNT(v.idvehiculo) AS cantidad "
+                   + "FROM Marcas m LEFT JOIN Vehiculos v ON m.idmarca = v.idmarca "
+                   + "GROUP BY m.idmarca, m.nombre_marca, m.pais_origen";
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
@@ -27,6 +28,7 @@ public class CECTMaestroDetalleDAO {
                 m.setIdmarca(rs.getInt("idmarca"));
                 m.setNombre_marca(rs.getString("nombre_marca"));
                 m.setPais_origen(rs.getString("pais_origen"));
+                m.setCantidad(rs.getInt("cantidad")); // ¡Guardamos la cantidad calculada!
                 lista.add(m);
             }
         } catch (Exception e) {
@@ -36,29 +38,32 @@ public class CECTMaestroDetalleDAO {
     }
 
 
-    public List<CECTMotocicleta> listarMotosPorMarca(int idMarcaSeleccionada) {
-        List<CECTMotocicleta> lista = new ArrayList<>();
-        String sql = "SELECT mo.*, ma.nombre_marca FROM Motocicletas mo "
-                + "INNER JOIN Marcas ma ON mo.idmarca = ma.idmarca "
-                + "WHERE mo.idmarca = ?";
+    public List<CECTVehiculo> listarVehiculosPorMarca(int idMarcaSeleccionada) {
+        List<CECTVehiculo> lista = new ArrayList<>();
+
+        String sql = "SELECT v.*, ma.nombre_marca FROM Vehiculos v "
+                + "INNER JOIN Marcas ma ON v.idmarca = ma.idmarca "
+                + "WHERE v.idmarca = ?";
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
             ps.setInt(1, idMarcaSeleccionada);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CECTMotocicleta moto = new CECTMotocicleta();
-                moto.setIdMotocicleta(rs.getInt("idmotocicleta"));
-                moto.setModelo(rs.getString("modelo"));
-                moto.setCilindraje(rs.getInt("cilindraje"));
-                moto.setColor(rs.getString("color"));
-                moto.setIdMarca(rs.getInt("idmarca"));
-                moto.setImagen(rs.getString("imagen"));
-                moto.setMarca(rs.getString("nombre_marca")); // Guardamos el nombre
-                lista.add(moto);
+                CECTVehiculo vehiculo = new CECTVehiculo();
+                
+                vehiculo.setIdVehiculo(rs.getInt("idvehiculo"));
+                vehiculo.setModelo(rs.getString("modelo"));
+                vehiculo.setAnio(rs.getInt("anio")); 
+                vehiculo.setColor(rs.getString("color"));
+                vehiculo.setIdMarca(rs.getInt("idmarca"));
+                vehiculo.setImagen(rs.getString("imagen"));
+                vehiculo.setMarca(rs.getString("nombre_marca")); 
+                
+                lista.add(vehiculo);
             }
         } catch (Exception e) {
-            System.err.println("Error al listar motos (Detalle): " + e.getMessage());
+            System.err.println("Error al listar vehículos (Detalle): " + e.getMessage());
         }
         return lista;
     }

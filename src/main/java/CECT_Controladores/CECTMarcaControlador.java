@@ -1,4 +1,4 @@
-package CECT_Controladores; // Ajusta el paquete
+package CECT_Controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +29,7 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
         this.vista.btnActualizarMarca.addActionListener(this);
         this.vista.btnEliminarMarca.addActionListener(this);
         this.vista.tableMarcas.addMouseListener(this);
+        this.vista.btnLimpiar.addActionListener(this); 
     }
     
     public void iniciar() {
@@ -39,6 +40,7 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
+ 
         if (e.getSource() == vista.btnGuardarMarca) {
             if (vista.txtNombreMarca.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "El nombre de la marca es obligatorio.");
@@ -56,6 +58,7 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
             }
         }
         
+     
         if (e.getSource() == vista.btnActualizarMarca) {
             if (idFilaSeleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "Seleccione una marca de la tabla para actualizar.");
@@ -68,13 +71,13 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(null, "Marca actualizada con éxito.");
                     limpiarCampos();
                     listarTabla();
-                    idFilaSeleccionada = -1; // Resetear
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al actualizar la marca.");
                 }
             }
         }
         
+  
         if (e.getSource() == vista.btnEliminarMarca) {
             if (idFilaSeleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "Seleccione una marca de la tabla para eliminar.");
@@ -85,25 +88,30 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
                         JOptionPane.showMessageDialog(null, "Marca eliminada con éxito.");
                         limpiarCampos();
                         listarTabla();
-                        idFilaSeleccionada = -1;
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al eliminar la marca.");
                     }
                 }
             }
         }
+        
+
+        if (e.getSource() == vista.btnLimpiar) {
+            limpiarCampos();
+        }
     }
 
     public void listarTabla() {
         List<CECTMarca> lista = dao.listar();
         modeloTabla = (DefaultTableModel) vista.tableMarcas.getModel();
-        modeloTabla.setRowCount(0); // Limpiar la tabla antes de cargar
+        modeloTabla.setRowCount(0); 
         
-        Object[] objeto = new Object[3];
+        Object[] objeto = new Object[4];
         for (int i = 0; i < lista.size(); i++) {
             objeto[0] = lista.get(i).getIdmarca();
             objeto[1] = lista.get(i).getNombre_marca();
             objeto[2] = lista.get(i).getPais_origen();
+            objeto[3] = lista.get(i).getCantidad(); 
             modeloTabla.addRow(objeto);
         }
         vista.tableMarcas.setModel(modeloTabla);
@@ -113,6 +121,9 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
         vista.txtNombreMarca.setText("");
         vista.txtPaisOrigen.setText("");
         idFilaSeleccionada = -1;
+        
+        vista.tableMarcas.clearSelection(); 
+        vista.btnGuardarMarca.setEnabled(true); 
     }
 
     @Override
@@ -122,9 +133,11 @@ public class CECTMarcaControlador implements ActionListener, MouseListener {
             if (fila > -1) {
                 idFilaSeleccionada = Integer.parseInt(vista.tableMarcas.getValueAt(fila, 0).toString());
                 vista.txtNombreMarca.setText(vista.tableMarcas.getValueAt(fila, 1).toString());
-                // Por si el país de origen es nulo en la BD
+                
                 Object pais = vista.tableMarcas.getValueAt(fila, 2);
                 vista.txtPaisOrigen.setText(pais != null ? pais.toString() : "");
+               
+                vista.btnGuardarMarca.setEnabled(false);
             }
         }
     }

@@ -4,6 +4,8 @@ import CECT_Conexion.CECTConexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CECTReportesDAO {
 
@@ -12,16 +14,40 @@ public class CECTReportesDAO {
     PreparedStatement ps;
     ResultSet rs;
 
-    public String obtenerConteoMarcas() {
-        StringBuilder reporte = new StringBuilder();
-        // El LEFT JOIN asegura que salgan las marcas, incluso si la cuenta de idmotocicleta es nula (0)
-        String sql = "SELECT ma.nombre_marca, COUNT(mo.idmotocicleta) AS cantidad "
-                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca "
-                + "GROUP BY ma.idmarca, ma.nombre_marca "
-                + "ORDER BY cantidad DESC";
+    public List<String> obtenerPaises() {
+        List<String> paises = new ArrayList<>();
+        paises.add("Todos"); 
+        
+        String sql = "SELECT DISTINCT pais_origen FROM Marcas WHERE pais_origen IS NOT NULL AND pais_origen != '' ORDER BY pais_origen";
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                paises.add(rs.getString("pais_origen"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error al cargar países: " + e.getMessage());
+        }
+        return paises;
+    }
+
+    public String obtenerConteoMarcas(String pais) {
+        StringBuilder reporte = new StringBuilder();
+        String sql = "SELECT ma.nombre_marca, COUNT(mo.idmotocicleta) AS cantidad "
+                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca ";
+        
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY ma.idmarca, ma.nombre_marca ORDER BY cantidad DESC";
+
+        try {
+            cx = con.getCon();
+            ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais); 
+            }
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -34,7 +60,7 @@ public class CECTReportesDAO {
         return reporte.toString();
     }
 
-    public String obtenerClasificacionMarcas() {
+    public String obtenerClasificacionMarcas(String pais) {
         StringBuilder reporte = new StringBuilder();
         String sql = "SELECT ma.nombre_marca, "
                 + "COUNT(mo.idmotocicleta) AS cantidad, "
@@ -44,13 +70,19 @@ public class CECTReportesDAO {
                 + "   WHEN COUNT(mo.idmotocicleta) BETWEEN 1 AND 2 THEN 'MEDIA' "
                 + "   ELSE 'ALTA DEMANDA' "
                 + "END AS clasificacion "
-                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca "
-                + "GROUP BY ma.idmarca, ma.nombre_marca "
-                + "ORDER BY cantidad DESC";
+                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca ";
+
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY ma.idmarca, ma.nombre_marca ORDER BY cantidad DESC";
 
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -64,18 +96,24 @@ public class CECTReportesDAO {
         return reporte.toString();
     }
 
-    public String obtenerColoresMarca() {
+    public String obtenerColoresMarca(String pais) {
         StringBuilder reporte = new StringBuilder();
         String sql = "SELECT mo.color, "
                 + "COUNT(mo.idmotocicleta) AS cantidad, "
                 + "GROUP_CONCAT(DISTINCT ma.nombre_marca SEPARATOR ', ') AS marcas_que_lo_usan "
-                + "FROM Motocicletas mo INNER JOIN Marcas ma ON mo.idmarca = ma.idmarca "
-                + "GROUP BY mo.color "
-                + "ORDER BY cantidad DESC";
+                + "FROM Motocicletas mo INNER JOIN Marcas ma ON mo.idmarca = ma.idmarca ";
+
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY mo.color ORDER BY cantidad DESC";
 
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -89,7 +127,7 @@ public class CECTReportesDAO {
         return reporte.toString();
     }
 
-    public String obtenerClasificacionCSV() {
+    public String obtenerClasificacionCSV(String pais) {
         StringBuilder csv = new StringBuilder();
         csv.append("Nombre Marca;Cantidad Motos;Cilindraje Promedio;Clasificacion\n");
 
@@ -100,11 +138,19 @@ public class CECTReportesDAO {
                 + "   WHEN COUNT(mo.idmotocicleta) BETWEEN 1 AND 2 THEN 'MEDIA' "
                 + "   ELSE 'ALTA DEMANDA' "
                 + "END AS clasificacion "
-                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca "
-                + "GROUP BY ma.idmarca, ma.nombre_marca";
+                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca ";
+
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY ma.idmarca, ma.nombre_marca";
+
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
             rs = ps.executeQuery();
             while (rs.next()) {
                 csv.append(rs.getString("nombre_marca")).append(";")
@@ -118,7 +164,70 @@ public class CECTReportesDAO {
         return csv.toString();
     }
 
-    public String obtenerClasificacionJSON() {
+    public String obtenerConteoCSV(String pais) {
+        StringBuilder csv = new StringBuilder();
+        csv.append("Nombre Marca;Cantidad Motos\n");
+
+        String sql = "SELECT ma.nombre_marca, COUNT(mo.idmotocicleta) AS cantidad "
+                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca ";
+        
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY ma.idmarca, ma.nombre_marca ORDER BY cantidad DESC";
+
+        try {
+            cx = con.getCon();
+            ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                csv.append(rs.getString("nombre_marca")).append(";")
+                   .append(rs.getInt("cantidad")).append("\n");
+            }
+        } catch (Exception e) {
+            System.err.println("Error al generar CSV de Conteo: " + e.getMessage());
+        }
+        return csv.toString();
+    }
+
+  
+    public String obtenerColoresCSV(String pais) {
+        StringBuilder csv = new StringBuilder();
+        csv.append("Color;Cantidad Motos;Marcas que lo usan\n");
+
+        String sql = "SELECT mo.color, COUNT(mo.idmotocicleta) AS cantidad, "
+                + "GROUP_CONCAT(DISTINCT ma.nombre_marca SEPARATOR ', ') AS marcas_que_lo_usan "
+                + "FROM Motocicletas mo INNER JOIN Marcas ma ON mo.idmarca = ma.idmarca ";
+
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY mo.color ORDER BY cantidad DESC";
+
+        try {
+            cx = con.getCon();
+            ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                csv.append(rs.getString("color").toUpperCase()).append(";")
+                   .append(rs.getInt("cantidad")).append(";")
+                   .append(rs.getString("marcas_que_lo_usan")).append("\n");
+            }
+        } catch (Exception e) {
+            System.err.println("Error al generar CSV de Colores: " + e.getMessage());
+        }
+        return csv.toString();
+    }
+
+
+
+    public String obtenerClasificacionJSON(String pais) {
         StringBuilder json = new StringBuilder();
         json.append("[\n");
 
@@ -129,11 +238,19 @@ public class CECTReportesDAO {
                 + "   WHEN COUNT(mo.idmotocicleta) BETWEEN 1 AND 2 THEN 'MEDIA' "
                 + "   ELSE 'ALTA DEMANDA' "
                 + "END AS clasificacion "
-                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca "
-                + "GROUP BY ma.idmarca, ma.nombre_marca";
+                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca ";
+
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY ma.idmarca, ma.nombre_marca";
+
         try {
             cx = con.getCon();
             ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
             rs = ps.executeQuery();
             boolean primero = true;
 
@@ -151,6 +268,86 @@ public class CECTReportesDAO {
             }
         } catch (Exception e) {
             System.err.println("Error al generar JSON: " + e.getMessage());
+        }
+        json.append("\n]");
+        return json.toString();
+    }
+
+
+    public String obtenerConteoJSON(String pais) {
+        StringBuilder json = new StringBuilder();
+        json.append("[\n");
+
+        String sql = "SELECT ma.nombre_marca, COUNT(mo.idmotocicleta) AS cantidad "
+                + "FROM Marcas ma LEFT JOIN Motocicletas mo ON ma.idmarca = mo.idmarca ";
+        
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY ma.idmarca, ma.nombre_marca ORDER BY cantidad DESC";
+
+        try {
+            cx = con.getCon();
+            ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
+            rs = ps.executeQuery();
+            boolean primero = true;
+
+            while (rs.next()) {
+                if (!primero) {
+                    json.append(",\n");
+                }
+                json.append("  {\n")
+                        .append("    \"marca\": \"").append(rs.getString("nombre_marca")).append("\",\n")
+                        .append("    \"cantidad\": ").append(rs.getInt("cantidad")).append("\n")
+                        .append("  }");
+                primero = false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error al generar JSON de Conteo: " + e.getMessage());
+        }
+        json.append("\n]");
+        return json.toString();
+    }
+
+
+    public String obtenerColoresJSON(String pais) {
+        StringBuilder json = new StringBuilder();
+        json.append("[\n");
+
+        String sql = "SELECT mo.color, COUNT(mo.idmotocicleta) AS cantidad, "
+                + "GROUP_CONCAT(DISTINCT ma.nombre_marca SEPARATOR ', ') AS marcas_que_lo_usan "
+                + "FROM Motocicletas mo INNER JOIN Marcas ma ON mo.idmarca = ma.idmarca ";
+
+        if (!pais.equals("Todos")) {
+            sql += "WHERE ma.pais_origen = ? ";
+        }
+        sql += "GROUP BY mo.color ORDER BY cantidad DESC";
+
+        try {
+            cx = con.getCon();
+            ps = cx.prepareStatement(sql);
+            if (!pais.equals("Todos")) {
+                ps.setString(1, pais);
+            }
+            rs = ps.executeQuery();
+            boolean primero = true;
+
+            while (rs.next()) {
+                if (!primero) {
+                    json.append(",\n");
+                }
+                json.append("  {\n")
+                        .append("    \"color\": \"").append(rs.getString("color").toUpperCase()).append("\",\n")
+                        .append("    \"cantidad\": ").append(rs.getInt("cantidad")).append(",\n")
+                        .append("    \"marcas\": \"").append(rs.getString("marcas_que_lo_usan")).append("\"\n")
+                        .append("  }");
+                primero = false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error al generar JSON de Colores: " + e.getMessage());
         }
         json.append("\n]");
         return json.toString();

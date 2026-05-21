@@ -75,13 +75,13 @@ public class CECT_FrmMaestroDetalle extends javax.swing.JInternalFrame {
 
         MarcasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Pais"
+                "Id", "Nombre", "Pais", "CantidadVehiculos"
             }
         ));
         jScrollPane1.setViewportView(MarcasTable);
@@ -94,7 +94,7 @@ public class CECT_FrmMaestroDetalle extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Modelo", "Cilindraje", "Color", "Marca", "Imagen"
+                "Id", "Modelo", "Año", "Color", "Marca", "Imagen"
             }
         ));
         jScrollPane2.setViewportView(MotosTable);

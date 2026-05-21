@@ -17,7 +17,7 @@ public class CECTConexion {
     public CECTConexion() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/motocicletas?useSSL=false&serverTimezone=UTC", "root", "");
+            this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vehiculos?useSSL=false&serverTimezone=UTC", "root", "");
             
         } catch (Exception e) {
             System.out.println("Error");

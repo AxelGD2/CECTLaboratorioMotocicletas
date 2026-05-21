@@ -1,9 +1,9 @@
 package CECT_Controladores;
 
 import CECT_Modelos.CECTMarca;
-import CECT_Modelos.CECTMotocicleta;
+import CECT_Modelos.CECTVehiculo;
 import CECT_Modelos.CECTMaestroDetalleDAO;
-import CECT_Vistas.CECT_FrmMaestroDetalle; // Ajusta a tu vista
+import CECT_Vistas.CECT_FrmMaestroDetalle; 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -34,27 +34,31 @@ public class CECTMaestroDetalleControlador implements MouseListener {
         modeloMaestro = (DefaultTableModel) vista.MarcasTable.getModel();
         modeloMaestro.setRowCount(0);
 
-        Object[] objeto = new Object[3];
+     
+        Object[] objeto = new Object[4];
         for (int i = 0; i < lista.size(); i++) {
             objeto[0] = lista.get(i).getIdmarca();
             objeto[1] = lista.get(i).getNombre_marca();
             objeto[2] = lista.get(i).getPais_origen();
+            objeto[3] = lista.get(i).getCantidad(); 
             modeloMaestro.addRow(objeto);
         }
         vista.MarcasTable.setModel(modeloMaestro);
     }
 
-
     private void cargarTablaDetalle(int idMarca) {
-        List<CECTMotocicleta> lista = dao.listarMotosPorMarca(idMarca);
+ 
+        List<CECTVehiculo> lista = dao.listarVehiculosPorMarca(idMarca);
+        
+
         modeloDetalle = (DefaultTableModel) vista.MotosTable.getModel();
         modeloDetalle.setRowCount(0);
 
         Object[] objeto = new Object[6];
         for (int i = 0; i < lista.size(); i++) {
-            objeto[0] = lista.get(i).getIdMotocicleta();
+            objeto[0] = lista.get(i).getIdVehiculo(); 
             objeto[1] = lista.get(i).getModelo();
-            objeto[2] = lista.get(i).getCilindraje();
+            objeto[2] = lista.get(i).getAnio(); 
             objeto[3] = lista.get(i).getColor();
             objeto[4] = lista.get(i).getMarca(); 
             objeto[5] = lista.get(i).getImagen();
@@ -77,7 +81,6 @@ public class CECTMaestroDetalleControlador implements MouseListener {
 
                 int idMarca = Integer.parseInt(vista.MarcasTable.getValueAt(filaSeleccionada, 0).toString());
 
-          
                 cargarTablaDetalle(idMarca);
             }
         }

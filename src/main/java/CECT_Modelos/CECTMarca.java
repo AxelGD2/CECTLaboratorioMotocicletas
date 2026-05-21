@@ -1,12 +1,21 @@
-package CECT_Modelos; 
+package CECT_Modelos;
 
 public class CECTMarca {
     private int idmarca;
     private String nombre_marca;
     private String pais_origen;
+    private int cantidad; 
+
 
     public CECTMarca() {
     }
+
+
+    public CECTMarca(String nombre_marca, String pais_origen) {
+        this.nombre_marca = nombre_marca;
+        this.pais_origen = pais_origen;
+    }
+
 
     public CECTMarca(int idmarca, String nombre_marca, String pais_origen) {
         this.idmarca = idmarca;
@@ -14,11 +23,12 @@ public class CECTMarca {
         this.pais_origen = pais_origen;
     }
 
-    public CECTMarca(String nombre_marca, String pais_origen) {
+    public CECTMarca(int idmarca, String nombre_marca, String pais_origen, int cantidad) {
+        this.idmarca = idmarca;
         this.nombre_marca = nombre_marca;
         this.pais_origen = pais_origen;
+        this.cantidad = cantidad;
     }
-    
 
     public int getIdmarca() {
         return idmarca;
@@ -42,6 +52,14 @@ public class CECTMarca {
 
     public void setPais_origen(String pais_origen) {
         this.pais_origen = pais_origen;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
     
     @Override

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -19,48 +20,110 @@ public class CECTReportesControlador implements ActionListener {
         this.dao = dao;
         this.vista = vista;
         
-        this.vista.btnExportarTXT.addActionListener(this);
-        this.vista.btnExportarCSV.addActionListener(this);
-        this.vista.btnExportarJSON.addActionListener(this);
+        this.vista.cmbPais.addActionListener(this);
+        
+        this.vista.btnExportarTXTCompleto.addActionListener(this);
+        this.vista.btnExportarCSVCompleto.addActionListener(this);
+        this.vista.btnExportarJSONCompleto.addActionListener(this);
+        
+
+        this.vista.btnExportarTXTConteo.addActionListener(this);
+        this.vista.btnExportarTXTClasif.addActionListener(this);
+        this.vista.btnExportarTXTColores.addActionListener(this);
+        
+      
+        this.vista.btnExportarCSVClasif.addActionListener(this);
+        this.vista.btnExportarJSONClasif.addActionListener(this);
+        
+
+         this.vista.btnExportarCSVConteo.addActionListener(this);
+         this.vista.btnExportarJSONConteo.addActionListener(this);
+        this.vista.btnExportarCSVColores.addActionListener(this);
+        this.vista.btnExportarJSONColores.addActionListener(this);
     }
     
     public void iniciar() {
-        vista.txtConteoMarcas.setText(dao.obtenerConteoMarcas());
-        vista.txtClasificacionMarcas.setText(dao.obtenerClasificacionMarcas());
-        vista.txtColoresMarca.setText(dao.obtenerColoresMarca());
+        cargarPaises();
+        actualizarReportes();
         
         vista.txtConteoMarcas.setEditable(false);
         vista.txtClasificacionMarcas.setEditable(false);
         vista.txtColoresMarca.setEditable(false);
     }
+    
+
+    private void cargarPaises() {
+        vista.cmbPais.removeAllItems();
+        List<String> paises = dao.obtenerPaises();
+        for (String p : paises) {
+            vista.cmbPais.addItem(p);
+        }
+    }
+    
+  
+    private void actualizarReportes() {
+        String paisSeleccionado = "Todos";
+        if (vista.cmbPais.getSelectedItem() != null) {
+            paisSeleccionado = vista.cmbPais.getSelectedItem().toString();
+        }
+        
+        vista.txtConteoMarcas.setText(dao.obtenerConteoMarcas(paisSeleccionado));
+        vista.txtClasificacionMarcas.setText(dao.obtenerClasificacionMarcas(paisSeleccionado));
+        vista.txtColoresMarca.setText(dao.obtenerColoresMarca(paisSeleccionado));
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
- 
-        if (e.getSource() == vista.btnExportarTXT) {
-            String contenidoTxt = "REPORTE CONSOLIDADO DE MOTOCICLETAS\n\n" +
+        
+
+        if (e.getSource() == vista.cmbPais) {
+            actualizarReportes(); 
+            return; 
+        }
+        
+      
+        String paisSeleccionado = "Todos";
+        if (vista.cmbPais.getSelectedItem() != null) {
+            paisSeleccionado = vista.cmbPais.getSelectedItem().toString();
+        }
+
+
+        if (e.getSource() == vista.btnExportarTXTCompleto) {
+            String contenidoTxt = "REPORTE CONSOLIDADO (" + paisSeleccionado.toUpperCase() + ")\n\n" +
                                  vista.txtConteoMarcas.getText() + "\n" +
                                  vista.txtClasificacionMarcas.getText() + "\n" +
                                  vista.txtColoresMarca.getText();
-            
-            guardarArchivo(contenidoTxt, "reporte_motos.txt", "Archivos de Texto (.txt)");
+            guardarArchivo(contenidoTxt, "reporte_completo.txt");
         }
-        
-     
-        if (e.getSource() == vista.btnExportarCSV) {
-            String contenidoCsv = dao.obtenerClasificacionCSV();
-            guardarArchivo(contenidoCsv, "reporte_motos.csv", "Archivos CSV (.csv)");
+        if (e.getSource() == vista.btnExportarCSVCompleto) {
+            guardarArchivo(dao.obtenerClasificacionCSV(paisSeleccionado), "reporte_completo.csv");
         }
-        
+        if (e.getSource() == vista.btnExportarJSONCompleto) {
+            guardarArchivo(dao.obtenerClasificacionJSON(paisSeleccionado), "reporte_completo.json");
+        }
 
-        if (e.getSource() == vista.btnExportarJSON) {
-            String contenidoJson = dao.obtenerClasificacionJSON();
-            guardarArchivo(contenidoJson, "reporte_motos.json", "Archivos JSON (.json)");
+  
+        if (e.getSource() == vista.btnExportarTXTConteo) {
+            guardarArchivo(vista.txtConteoMarcas.getText(), "conteo_marcas.txt");
+        }
+        if (e.getSource() == vista.btnExportarTXTClasif) {
+            guardarArchivo(vista.txtClasificacionMarcas.getText(), "clasificacion_marcas.txt");
+        }
+        if (e.getSource() == vista.btnExportarTXTColores) {
+            guardarArchivo(vista.txtColoresMarca.getText(), "colores_marcas.txt");
+        }
+        
+    
+        if (e.getSource() == vista.btnExportarCSVClasif) {
+            guardarArchivo(dao.obtenerClasificacionCSV(paisSeleccionado), "clasificacion_marcas.csv");
+        }
+        if (e.getSource() == vista.btnExportarJSONClasif) {
+            guardarArchivo(dao.obtenerClasificacionJSON(paisSeleccionado), "clasificacion_marcas.json");
         }
     }
     
 
-    private void guardarArchivo(String contenido, String nombrePorDefecto, String descripcionFiltro) {
+    private void guardarArchivo(String contenido, String nombrePorDefecto) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccione dónde guardar el reporte");
         fileChooser.setSelectedFile(new File(nombrePorDefecto));

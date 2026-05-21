@@ -37,6 +37,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         btnActualizarMarca = new javax.swing.JButton();
         btnEliminarMarca = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -54,13 +55,13 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
 
         tableMarcas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Pais"
+                "Id", "Nombre", "Pais", "Cantidad de Vehiculos"
             }
         ));
         jScrollPane1.setViewportView(tableMarcas);
@@ -71,6 +72,8 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
         btnActualizarMarca.setText("Actualizar");
 
         btnEliminarMarca.setText("Eliminar");
+
+        btnLimpiar.setText("Limpiar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +87,14 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGuardarMarca)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardarMarca)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnActualizarMarca)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminarMarca)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpiar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
@@ -94,11 +104,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
                                     .addComponent(txtNombreMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPaisOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnActualizarMarca)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminarMarca)))))
+                            .addComponent(jLabel4))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,16 +121,16 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtPaisOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(btnGuardarMarca)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarMarca)
+                    .addComponent(btnActualizarMarca)
+                    .addComponent(btnEliminarMarca)
+                    .addComponent(btnLimpiar))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizarMarca)
-                    .addComponent(btnEliminarMarca))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,6 +141,7 @@ public class CECT_FrmNuevaMarca extends javax.swing.JInternalFrame {
     public javax.swing.JButton btnActualizarMarca;
     public javax.swing.JButton btnEliminarMarca;
     public javax.swing.JButton btnGuardarMarca;
+    public javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
